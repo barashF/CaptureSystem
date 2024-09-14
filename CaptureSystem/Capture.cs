@@ -564,6 +564,12 @@ namespace CaptureSystem
                 player.setPluginWidgetFlag(EPluginWidgetFlags.Modal, false);
                 return;
             }
+            else if (buttonName == "close_subclass")
+            {
+                EffectManager.askEffectClearByID(22230, untplayer.CSteamID);
+                player.setPluginWidgetFlag(EPluginWidgetFlags.Modal, false);
+                return;
+            }
             else if (buttonName.Contains("Block_"))
             {
                 for (int i = 0; i < 6; i++)
