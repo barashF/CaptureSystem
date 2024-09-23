@@ -37,6 +37,12 @@ namespace CaptureSystem.Commands.CallUI
         {
             UnturnedPlayer player = (UnturnedPlayer)caller;
             var playerInf = Capture.test.PlayerInf.Find(inf => inf.player == player.CSteamID);
+            var team = Capture.test.Team.Find(t => t.id == playerInf.team);
+            if(Vector3.Distance(player.Position, team.point) > 500)
+            {
+                UnturnedChat.Say(player, "Вы находитесь слишком далеко от базы", UnityEngine.Color.red);
+                return;
+            }
 
             var fractions = Capture.test.Fraction.FindAll(fraction => fraction.team == playerInf.team);
             EffectManager.sendUIEffect(22229, 1, player.CSteamID, true);

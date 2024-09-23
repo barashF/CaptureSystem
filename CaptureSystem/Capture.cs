@@ -528,7 +528,7 @@ namespace CaptureSystem
         public bool CheckRang(UnturnedPlayer player, Transport vehicle)
         {
             var playerinf = test.PlayerInf.Find(inf => inf.player == player.CSteamID);
-            if (playerinf.rang >= (vehicle.rang + 1))
+            if (playerinf.rang >= vehicle.rang)
             {
                 return true;
             }
@@ -622,6 +622,7 @@ namespace CaptureSystem
                 groupview.ChangeTeam(untplayer, team_id);
                 EffectManager.askEffectClearByID(22227, untplayer.CSteamID);
                 player.setPluginWidgetFlag(EPluginWidgetFlags.Modal, false);
+                untplayer.Kick("Необходимо перезайти после выбора команды");
             }
             else if (buttonName.Contains("group_"))
             {

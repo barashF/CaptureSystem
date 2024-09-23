@@ -14,6 +14,8 @@ using Rocket.Unturned.Events;
 using System;
 using System.Threading;
 using SDG.NetTransport;
+using Rocket.Core.Permissions;
+using Rocket.Core;
 
 namespace CaptureSystem.Commands.CallUI
 {
@@ -36,7 +38,9 @@ namespace CaptureSystem.Commands.CallUI
         public void Execute(IRocketPlayer caller, string[] command)
         {
             UnturnedPlayer player = (UnturnedPlayer)caller;
-
+            RocketPermissionsManager permissionsManager = (RocketPermissionsManager)R.Permissions;
+            permissionsManager.RemovePlayerFromGroup("RF", player);
+            permissionsManager.RemovePlayerFromGroup("NATO", player);
             EffectManager.sendUIEffect(22227, 2, player.CSteamID, true);
             player.Player.setPluginWidgetFlag(EPluginWidgetFlags.Modal, true);
         }
