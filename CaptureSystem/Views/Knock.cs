@@ -44,6 +44,7 @@ namespace CaptureSystem.Views
             {
                 player.Player.stance.stance = EPlayerStance.PRONE;
                 player.Player.equipment.dequip();
+                
                 Capture.knockedOutPlayers.Add(new Capture.KnockedOutPlayer
                 {
                     player = player.CSteamID,

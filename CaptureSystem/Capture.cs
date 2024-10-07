@@ -45,6 +45,7 @@ namespace CaptureSystem
 
         public static List<PlayerInf> onServerPlayers = new List<PlayerInf> { };
 
+        public static List<PullPlayer> onPulledPlayers = new List<PullPlayer> { };
 
         public Views.Score score = new Views.Score { };
         public Views.Connected connected = new Views.Connected { };
@@ -55,7 +56,22 @@ namespace CaptureSystem
         public Views.Knock knockview = new Views.Knock { };
         public Views.Hangar hangarview = new Views.Hangar { };
         public Views.Capted captview = new Views.Capted { };
+        public Views.Pull pullview = new Views.Pull{ };
 
+        public class PullPlayer
+        {
+            public Steamworks.CSteamID knockedPlayer;
+
+            public Steamworks.CSteamID pullPlayer;
+
+            public PullPlayer(){ }
+
+            public PullPlayer(Steamworks.CSteamID knockedPlayer, Steamworks.CSteamID pullPlayer)
+            { 
+                this.knockedPlayer = knockedPlayer;
+                this.pullPlayer = pullPlayer;
+            }
+        }
 
         public class PlayerVehicle
         {
@@ -488,6 +504,7 @@ namespace CaptureSystem
             ExitLocation(player);
             score.PlucScoreKill(UnturnedPlayer.FromCSteamID(murderer), player);
             knockedOutPlayers.RemoveAll(pl => pl.player == player.CSteamID);
+            pullview.TryFinishPull(player);
         }
 
         private void UnturnedPlayerEvents_OnPlayerUpdatePosition(UnturnedPlayer player, Vector3 position)
@@ -499,6 +516,7 @@ namespace CaptureSystem
                 return;
             }
             EnterLocation(player, location.id);
+            pullview.TryPull(player);
         }
 
 
@@ -517,7 +535,14 @@ namespace CaptureSystem
 
         private void UnturnedPlayerEvents_OnPlayerUpdateGesture(UnturnedPlayer player, UnturnedPlayerEvents.PlayerGesture gesture)
         {
-            
+            if(gesture.Equals(Rocket.Unturned.Events.UnturnedPlayerEvents.PlayerGesture.SurrenderStart))
+            {
+                pullview.TryStartPull(player);
+            }
+            else if(gesture.Equals(Rocket.Unturned.Events.UnturnedPlayerEvents.PlayerGesture.SurrenderStart))
+            {
+                pullview.TryFinishPull(player);
+            }
         }
 
         private void UnturnedPlayerEvents_OnPlayerRevive(UnturnedPlayer player, Vector3 position, byte angle)
