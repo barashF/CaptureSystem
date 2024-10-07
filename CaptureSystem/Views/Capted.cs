@@ -1,4 +1,6 @@
-﻿using SDG.Unturned;
+﻿using Rocket.Unturned.Chat;
+using Rocket.Unturned.Player;
+using SDG.Unturned;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,21 +17,19 @@ namespace CaptureSystem.Views
             string team_name = Capture.test.Team.Find(team => team.id == capt.team).name;
             string percent = PercentCapt(capt.time).ToString();
 
-            foreach(var i in Capture.playerOnLocations)
+            foreach(var i in Capture.playerOnLocations.FindAll(pl => pl.id_location == capt.id_location))
             {
-                if(i.id_location == capt.id_location)
-                {
-                    EffectManager.sendUIEffect(22225, 3, i.player, true);
-                    EffectManager.sendUIEffectText(3, i.player, true, "Name", loc_name);
-                    EffectManager.sendUIEffectText(3, i.player, true, "Owner", $"{team_name} захватывает: {percent}%");
-                }
+                EffectManager.sendUIEffect(22225, 3, i.player, true);
+                EffectManager.sendUIEffectText(3, i.player, true, "Name", loc_name);
+                EffectManager.sendUIEffectText(3, i.player, true, "Owner", $"{team_name} захватывает: {percent}%");
+                
             }
         }
 
         public int PercentCapt(int time)
         {
             int progress = 900 - time;
-            int percent = progress / 900 * 100;
+            int percent = (progress * 100) / 900 ;
             return percent;
         }
 

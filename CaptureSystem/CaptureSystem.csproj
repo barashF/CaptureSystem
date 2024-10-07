@@ -241,6 +241,7 @@
     <Compile Include="Commands\Tech_commands\AddImageFraction.cs" />
     <Compile Include="Commands\Tech_commands\AddSubclass.cs" />
     <Compile Include="Commands\Tech_commands\AddImageSubclass.cs" />
+    <Compile Include="Commands\Tech_commands\InviteGroup.cs" />
     <Compile Include="Commands\Tech_commands\OnStart.cs" />
     <Compile Include="Commands\Tech_commands\OffStartUI.cs" />
     <Compile Include="Commands\tests\Knock.cs" />

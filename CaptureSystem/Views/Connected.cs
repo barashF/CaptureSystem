@@ -72,6 +72,10 @@ namespace CaptureSystem.Views
         public void AddOnlinePlayer(UnturnedPlayer player)
         {
             var playerInf = Capture.test.PlayerInf.Find(inf => inf.player == player.CSteamID);
+            if(playerInf == null)
+            {
+                return;
+            }
             try
             {
                 Capture.onServerPlayers.Add(playerInf);

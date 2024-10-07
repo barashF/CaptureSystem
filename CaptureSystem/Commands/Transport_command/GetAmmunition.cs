@@ -29,7 +29,7 @@ namespace CaptureSystem.Commands.Transport_command
 
         public List<string> Aliases => new List<string> { "ammu" };
 
-        public List<string> Permissions => new List<string> { "ammu" };
+        public List<string> Permissions => new List<string> { "ammunition" };
 
         public void Execute(IRocketPlayer caller, string[] command)
         {

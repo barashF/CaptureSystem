@@ -27,9 +27,9 @@ namespace CaptureSystem
             sfA = "sfa";
             sfB = "sfb";
 
-            min_amount_capture = 3;
+            min_amount_capture = 1;
             time = 30;
-            min_rang = 2;
+            min_rang = 1;
             kd = 120;
 
             plus_score_for_kill = 2;

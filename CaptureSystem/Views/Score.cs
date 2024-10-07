@@ -41,7 +41,7 @@ namespace CaptureSystem.Views
                 DB.DataBase.Save(Capture.test);
 
                 EffectManager.sendUIEffectText(5, player.CSteamID, true, "rank", next_rank.name);
-
+                EffectManager.sendUIEffectText(5, player.CSteamID, true, "score", playerinf.score.ToString() + "/" + next_rank.score.ToString());
                 rank = Capture.test.Rank[playerinf.rang];
                 try
                 {

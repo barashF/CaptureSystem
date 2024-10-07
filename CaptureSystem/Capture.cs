@@ -267,7 +267,7 @@ namespace CaptureSystem
             }
 
             knockedOutPlayers.RemoveAll(pl => pl.player == knocked.CSteamID);
-            score.UpdateScore(medic, 10);
+            score.UpdateScore(medic, 2);
         }
 
         private void Events_OnPlayerDisconnected(UnturnedPlayer player)
